@@ -8,13 +8,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Paleta base idéntica al tema oscuro por defecto de shadcn/ui
-        background: "#09090b",     // zinc-950
-        card: "#18181b",           // zinc-900
-        border: "#27272a",         // zinc-800
-        muted: "#71717a",          // zinc-500
-        primary: "#10b981",        // emerald-500 (acento deportivo/activo)
+        ig: {
+          black: "#000000",
+          surface: "#121212",
+          elevated: "#1e1e1e",
+          border: "#262626",
+          muted: "#737373",
+          secondary: "#a8a8a8",
+        }
       },
+      backgroundImage: {
+        'ig-gradient': 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+      }
     },
   },
   plugins: [],

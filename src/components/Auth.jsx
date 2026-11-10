@@ -19,40 +19,55 @@ export default function Auth() {
     });
 
     if (error) {
-      setErrorMsg(error.message === 'Invalid login credentials' 
-        ? 'Correo o contraseña incorrectos' 
-        : error.message);
+      setErrorMsg(
+        error.message === 'Invalid login credentials'
+          ? 'Correo o contraseña incorrectos'
+          : error.message
+      );
     }
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl">
-        <div className="flex flex-col items-center mb-6">
-          <div className="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl mb-3 border border-emerald-500/20">
-            <Dumbbell className="w-7 h-7" />
+    <div className="min-h-screen bg-ig-black text-white flex items-center justify-center p-4 antialiased selection:bg-pink-500/30">
+      <div className="w-full max-w-sm bg-ig-surface border border-ig-border rounded-3xl p-7 shadow-2xl relative overflow-hidden">
+        {/* Glow sutil superior */}
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 bg-ig-gradient opacity-15 blur-3xl pointer-events-none rounded-full" />
+
+        {/* Encabezado y Marca */}
+        <div className="flex flex-col items-center mb-6 relative">
+          <div className="p-3.5 rounded-2xl bg-ig-black border border-ig-border mb-3 shadow-inner">
+            <div className="p-2 rounded-xl bg-ig-gradient text-white flex items-center justify-center shadow-[0_4px_16px_rgba(225,48,108,0.3)]">
+              <Dumbbell className="w-6 h-6 stroke-[2.2]" />
+            </div>
           </div>
-          <h1 className="text-xl font-bold text-zinc-100 tracking-tight">AlDiaFit</h1>
-          <p className="text-xs text-zinc-400 mt-1">Control de Membresías</p>
+          
+          <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-orange-400 via-rose-500 to-fuchsia-500 bg-clip-text text-transparent">
+            AlDiaFit
+          </h1>
+          <p className="text-xs text-ig-secondary mt-1">Control de Membresías</p>
         </div>
 
+        {/* Alerta de error */}
         {errorMsg && (
-          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-xs text-red-400 flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0" />
+          <div className="mb-4 p-3 bg-rose-950/40 border border-rose-500/50 rounded-xl text-xs text-rose-300 flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
             <span>{errorMsg}</span>
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        {/* Formulario */}
+        <form onSubmit={handleLogin} className="space-y-3.5 relative">
           <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1.5">Correo Electrónico</label>
+            <label className="block text-[11px] font-medium text-ig-secondary mb-1.5 ml-1">
+              Correo Electrónico
+            </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-zinc-500 absolute left-3 top-3" />
+              <Mail className="w-4 h-4 text-ig-muted absolute left-3.5 top-3" />
               <input
                 type="email"
                 required
-                className="w-full pl-9 pr-3 py-2 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:border-emerald-500 focus:outline-none transition-colors"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-ig-black border border-ig-border rounded-xl text-white text-xs placeholder-ig-muted focus:border-neutral-500 focus:outline-none transition-colors"
                 placeholder="admin@aldiafit.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -61,13 +76,15 @@ export default function Auth() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1.5">Contraseña</label>
+            <label className="block text-[11px] font-medium text-ig-secondary mb-1.5 ml-1">
+              Contraseña
+            </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-zinc-500 absolute left-3 top-3" />
+              <Lock className="w-4 h-4 text-ig-muted absolute left-3.5 top-3" />
               <input
                 type="password"
                 required
-                className="w-full pl-9 pr-3 py-2 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:border-emerald-500 focus:outline-none transition-colors"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-ig-black border border-ig-border rounded-xl text-white text-xs placeholder-ig-muted focus:border-neutral-500 focus:outline-none transition-colors"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -78,11 +95,15 @@ export default function Auth() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] transition-all text-zinc-950 font-semibold rounded-lg text-sm flex items-center justify-center gap-2 disabled:opacity-50 mt-2"
+            className="w-full mt-2 py-2.5 rounded-xl bg-ig-gradient font-semibold text-xs text-white shadow-[0_4px_20px_rgba(225,48,108,0.35)] hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Entrar al Panel'}
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Iniciar Sesion'}
           </button>
         </form>
+
+        <p className="mt-6 text-center text-[10px] text-ig-muted">
+          Acceso administrativo protegido por Supabase Auth
+        </p>
       </div>
     </div>
   );

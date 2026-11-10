@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  server: {
+    host: true, // Expone automáticamente a 0.0.0.0
+    port: 5173,
+  },
   plugins: [
     react(),
     VitePWA({
@@ -34,7 +38,7 @@ export default defineConfig({
               cacheName: 'supabase-cache',
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 // 24 horas
+                maxAgeSeconds: 60 * 60 * 24
               },
               cacheableResponse: {
                 statuses: [0, 200]

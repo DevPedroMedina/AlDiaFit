@@ -4,7 +4,8 @@
 
 @layer base {
   body {
-    @apply bg-[#09090b] text-zinc-100 antialiased;
+    @apply bg-ig-black text-white antialiased pb-24 selection:bg-pink-500/30;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-tap-highlight-color: transparent;
   }
 }
