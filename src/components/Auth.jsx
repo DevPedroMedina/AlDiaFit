@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { Dumbbell, Lock, Mail, AlertCircle, Loader2 } from 'lucide-react';
+import OnboardingModal from './OnboardingModal';
+import { Dumbbell, Lock, Mail, AlertCircle, Loader2, Sparkles } from 'lucide-react';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [onboardingOpen, setOnboardingOpen] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,12 +31,12 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-ig-black text-white flex items-center justify-center p-4 antialiased selection:bg-pink-500/30">
+    <div className="min-h-screen bg-ig-black text-white flex flex-col items-center justify-center p-4 antialiased selection:bg-pink-500/30">
       <div className="w-full max-w-sm bg-ig-surface border border-ig-border rounded-3xl p-7 shadow-2xl relative overflow-hidden">
-        {/* Glow sutil superior */}
+        {/* Glow de acento superior */}
         <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 bg-ig-gradient opacity-15 blur-3xl pointer-events-none rounded-full" />
 
-        {/* Encabezado y Marca */}
+        {/* Encabezado */}
         <div className="flex flex-col items-center mb-6 relative">
           <div className="p-3.5 rounded-2xl bg-ig-black border border-ig-border mb-3 shadow-inner">
             <div className="p-2 rounded-xl bg-ig-gradient text-white flex items-center justify-center shadow-[0_4px_16px_rgba(225,48,108,0.3)]">
@@ -97,14 +99,28 @@ export default function Auth() {
             disabled={loading}
             className="w-full mt-2 py-2.5 rounded-xl bg-ig-gradient font-semibold text-xs text-white shadow-[0_4px_20px_rgba(225,48,108,0.35)] hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Iniciar Sesion'}
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Entrar al Panel'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-[10px] text-ig-muted">
-          Acceso administrativo protegido por Supabase Auth
-        </p>
+        {/* Botón de Onboarding / Demostración */}
+        <div className="mt-5 pt-4 border-t border-ig-border text-center">
+          <button
+            type="button"
+            onClick={() => setOnboardingOpen(true)}
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-ig-secondary hover:text-white transition-colors"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-rose-400" />
+            <span>¿Cómo funciona AlDiaFit? Conoce la app</span>
+          </button>
+        </div>
       </div>
+
+      {/* Modal del Onboarding */}
+      <OnboardingModal
+        isOpen={onboardingOpen}
+        onClose={() => setOnboardingOpen(false)}
+      />
     </div>
   );
 }
